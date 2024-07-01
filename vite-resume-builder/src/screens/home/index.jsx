@@ -1,8 +1,12 @@
-import React from 'react'
+import Header from "@/components/custom/Header"
+import { UserButton } from "@clerk/clerk-react"
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div>
+      <Header />
+      <UserButton />
+    </div>
   )
 }
 

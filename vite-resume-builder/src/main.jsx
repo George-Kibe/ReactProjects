@@ -6,21 +6,29 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import SignInPage from './auth/sign-in'
 import HomePage from './screens/home'
 import Dashboard from './screens/dashboard'
+import { ClerkProvider } from '@clerk/clerk-react'
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
+console.log("Publishable key: ", PUBLISHABLE_KEY)
+
+// Router instance
 const router = createBrowserRouter([
   {
     // path: '/',
     element: <App />,
     children: [
       {
-        path: '/',
-        element: <HomePage />,
-      },
-      {
         path: '/dashboard',
         element: <Dashboard />,
       },
     ],
+  },
+  {
+    path: '/',
+    element: <HomePage />,
   },
   {
     path: '/auth/sign-in',
@@ -30,6 +38,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+      <RouterProvider router={router} />
+    </ClerkProvider>
   </React.StrictMode>,
 )

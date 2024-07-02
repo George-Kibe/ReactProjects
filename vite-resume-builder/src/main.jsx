@@ -8,6 +8,7 @@ import HomePage from './screens/home'
 import Dashboard from './screens/dashboard'
 import { ClerkProvider } from '@clerk/clerk-react'
 import EditResume from './screens/dashboard/resume/[resumeId]/edit/index.jsx'
+import ViewResume from './screens/my-resume/[resumeId]/view/index.jsx'
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 if (!PUBLISHABLE_KEY) {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
     path: '/auth/sign-in',
     element: <SignInPage />,
   },
+  {
+    path:'/my-resume/:resumeId/view',
+    element:<ViewResume/>
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
